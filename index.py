@@ -68,7 +68,6 @@ def handle_image(event):
         reply_message(event, messages)
 
     elif isinstance(result, list):
-        from pprint import pprint
 
         for column in result:
             print('thumbnail_image_url:', column['thumbnail_image_url'])
@@ -87,14 +86,11 @@ def handle_image(event):
             )
             for column in result
         ]
-        pprint(columns)
 
         messages = TemplateSendMessage(
             alt_text='template',
             template=CarouselTemplate(columns=columns),
         )
-
-        pprint(messages)
 
         reply_message(event, messages)
 
