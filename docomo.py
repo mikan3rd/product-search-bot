@@ -121,15 +121,14 @@ def search_product(image=None):
 
     result = [
         {
-            "thumbnailImageUrl": content['imageUrl'],
+            "thumbnail_image_url": content['imageUrl'],
             "title": content['detail']['itemName'],
             "text": "{maker}： {brand}\n発売日： {releaseDate}"
             .format(**content['detail']),
-            "actions": [{
-                "type": "uri",
+            "actions": {
                 "label": "商品ページを見る",
                 "uri": content['sites'][0]['url']
-            }]
+            }
         }
         for content in candidates
     ]

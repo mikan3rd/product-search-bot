@@ -6,7 +6,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (CarouselColumn, CarouselTemplate, ImageMessage,
                             MessageEvent, TemplateSendMessage, TextMessage,
-                            TextSendMessage)
+                            TextSendMessage, URITemplateAction)
 
 import settings
 from docomo import search_product
@@ -68,11 +68,32 @@ def handle_image(event):
         reply_message(event, messages)
 
     elif isinstance(result, list):
-        columns = [CarouselColumn(column) for column in result]
-        messages = [TemplateSendMessage(
-            alt_text='Carousel template',
-            template=CarouselTemplate(columns=columns),
-        )]
+        from pprint import pprint
+
+        columns = [
+            CarouselColumn(
+                thumbnail_image_url=column['thumbnail_image_url'],
+                title=column['title'],
+                text=column['text'],
+                actions=[
+                    URITemplateAction(
+                        label=column['actions']['label'],
+                        uri=column['actions']['uri'],
+                    )
+                ]
+            )
+            for column in result
+        ]
+        pprint(columns)
+
+        messages = [
+            TemplateSendMessage(
+                alt_text='Carousel template',
+                template=CarouselTemplate(columns=columns),
+            ),
+        ]
+        pprint(messages)
+
         reply_message(event, messages)
 
     # except Exception as e:
