@@ -86,12 +86,11 @@ def handle_image(event):
         ]
         pprint(columns)
 
-        messages = [
-            TemplateSendMessage(
-                alt_text='Carousel template',
-                template=CarouselTemplate(columns=columns),
-            ),
-        ]
+        messages = TemplateSendMessage(
+            alt_text='Carousel template',
+            template=CarouselTemplate(columns=columns),
+        )
+
         pprint(messages)
 
         reply_message(event, messages)
