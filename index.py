@@ -72,7 +72,6 @@ def handle_image(event):
 
         for column in result:
             print('thumbnail_image_url:', column['thumbnail_image_url'])
-            print('uri:', column['actions']['uri'])
 
         columns = [
             CarouselColumn(
