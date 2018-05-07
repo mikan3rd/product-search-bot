@@ -60,43 +60,42 @@ def handle_image(event):
 
     image = BytesIO(message_content.content)
 
-    # try:
-    result = search_product(image)
+    try:
+        result = search_product(image)
 
-    if isinstance(result, str):
-        messages = [TextSendMessage(text=result)]
-        reply_message(event, messages)
+        if isinstance(result, str):
+            messages = [TextSendMessage(text=result)]
 
-    elif isinstance(result, list):
+        elif isinstance(result, list):
 
-        for column in result:
-            print('thumbnail_image_url:', column['thumbnail_image_url'])
+            for column in result:
+                print('thumbnail_image_url:', column['thumbnail_image_url'])
 
-        columns = [
-            CarouselColumn(
-                thumbnail_image_url=column['thumbnail_image_url'],
-                title=column['title'],
-                text=column['text'],
-                actions=[
-                    URITemplateAction(
-                        label=column['actions']['label'],
-                        uri=column['actions']['uri'],
-                    )
-                ]
+            columns = [
+                CarouselColumn(
+                    thumbnail_image_url=column['thumbnail_image_url'],
+                    title=column['title'],
+                    text=column['text'],
+                    actions=[
+                        URITemplateAction(
+                            label=column['actions']['label'],
+                            uri=column['actions']['uri'],
+                        )
+                    ]
+                )
+                for column in result
+            ]
+
+            messages = TemplateSendMessage(
+                alt_text='template',
+                template=CarouselTemplate(columns=columns),
             )
-            for column in result
-        ]
-
-        messages = TemplateSendMessage(
-            alt_text='template',
-            template=CarouselTemplate(columns=columns),
-        )
 
         reply_message(event, messages)
 
-    # except Exception as e:
-    #     print("error:", e)
-    #     reply_message(event, TextSendMessage(text='エラーが発生しました'))
+    except Exception as e:
+        print("error:", e)
+        reply_message(event, TextSendMessage(text='エラーが発生しました'))
 
 
 def reply_message(event, messages):
