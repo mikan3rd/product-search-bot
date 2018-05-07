@@ -70,6 +70,13 @@ def handle_image(event):
     elif isinstance(result, list):
         from pprint import pprint
 
+        for column in result:
+            print('thumbnail_image_url:', column['thumbnail_image_url'])
+            print('title:', column['title'])
+            print('text:', column['text'])
+            print('label:', column['actions']['label'])
+            print('uri:', column['actions']['uri'])
+
         columns = [
             CarouselColumn(
                 thumbnail_image_url=column['thumbnail_image_url'],
@@ -87,7 +94,7 @@ def handle_image(event):
         pprint(columns)
 
         messages = TemplateSendMessage(
-            alt_text='Carousel template',
+            alt_text='template',
             template=CarouselTemplate(columns=columns),
         )
 

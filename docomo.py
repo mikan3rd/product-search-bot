@@ -123,7 +123,7 @@ def search_product(image=None):
         {
             "thumbnail_image_url": content['imageUrl'],
             "title": content['detail']['itemName'],
-            "text": "{maker}： {brand} 発売日： {releaseDate}"
+            "text": "{maker}： {brand}\n発売日： {releaseDate}"
             .format(**content['detail']),
             "actions": {
                 "label": "商品ページを見る",
