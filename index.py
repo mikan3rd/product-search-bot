@@ -75,7 +75,7 @@ def handle_image(event):
 
         columns = [
             CarouselColumn(
-                thumbnail_image_url='https://images-na.ssl-images-amazon.com/images/I/815nWbAHZoL._SL1500_.jpg',
+                thumbnail_image_url=column['thumbnail_image_url'],
                 title=column['title'],
                 text=column['text'],
                 actions=[
