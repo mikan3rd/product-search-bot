@@ -4,7 +4,8 @@ from io import BytesIO
 from flask import Flask, abort, request
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import (ImageMessage, MessageEvent, TextMessage,
+from linebot.models import (CarouselColumn, CarouselTemplate, ImageMessage,
+                            MessageEvent, TemplateSendMessage, TextMessage,
                             TextSendMessage)
 
 import settings
@@ -42,17 +43,10 @@ def handle_message(event):
     # print("handle_message:", event)
     text = event.message.text
 
-    if (text.startswith('http')):
-        image_text = search_product(text)
-        messages = [
-            TextSendMessage(text=image_text),
-        ]
-
-    else:
-        messages = [
-            TextSendMessage(text=text),
-            TextSendMessage(text='画像を送信するか、画像のURLを送ってみてね!'),
-        ]
+    messages = [
+        TextSendMessage(text=text),
+        TextSendMessage(text='画像を送ってみてね!'),
+    ]
 
     reply_message(event, messages)
 
@@ -67,13 +61,19 @@ def handle_image(event):
     image = BytesIO(message_content.content)
 
     try:
-        image_text = search_product(image=image)
+        result = search_product(image)
 
-        messages = [
-            TextSendMessage(text=image_text),
-        ]
+        if isinstance(result, str):
+            messages = [TextSendMessage(text=result)]
+            reply_message(event, messages)
 
-        reply_message(event, messages)
+        elif isinstance(result, list):
+            columns = [CarouselColumn(column) for column in result]
+            messages = [TemplateSendMessage(
+                alt_text='Carousel template',
+                template=CarouselTemplate(columns=columns),
+            )]
+            reply_message(event, result)
 
     except Exception as e:
         print("error:", e)
