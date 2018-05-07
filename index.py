@@ -73,7 +73,7 @@ def handle_image(event):
                 alt_text='Carousel template',
                 template=CarouselTemplate(columns=columns),
             )]
-            reply_message(event, result)
+            reply_message(event, messages)
 
     except Exception as e:
         print("error:", e)
