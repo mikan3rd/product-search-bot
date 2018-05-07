@@ -60,24 +60,24 @@ def handle_image(event):
 
     image = BytesIO(message_content.content)
 
-    try:
-        result = search_product(image)
+    # try:
+    result = search_product(image)
 
-        if isinstance(result, str):
-            messages = [TextSendMessage(text=result)]
-            reply_message(event, messages)
+    if isinstance(result, str):
+        messages = [TextSendMessage(text=result)]
+        reply_message(event, messages)
 
-        elif isinstance(result, list):
-            columns = [CarouselColumn(column) for column in result]
-            messages = [TemplateSendMessage(
-                alt_text='Carousel template',
-                template=CarouselTemplate(columns=columns),
-            )]
-            reply_message(event, messages)
+    elif isinstance(result, list):
+        columns = [CarouselColumn(column) for column in result]
+        messages = [TemplateSendMessage(
+            alt_text='Carousel template',
+            template=CarouselTemplate(columns=columns),
+        )]
+        reply_message(event, messages)
 
-    except Exception as e:
-        print("error:", e)
-        reply_message(event, TextSendMessage(text='エラーが発生しました'))
+    # except Exception as e:
+    #     print("error:", e)
+    #     reply_message(event, TextSendMessage(text='エラーが発生しました'))
 
 
 def reply_message(event, messages):
