@@ -66,7 +66,7 @@ def search_product(image=None):
 
         result = {
             "thumbnail_image_url": imageUrl,
-            "title": content['detail']['itemName'],
+            "title": content['detail']['itemName'][:40],
             "text": "{maker}： {brand}\n発売日： {releaseDate}"
             .format(**content['detail']),
             "actions": {
