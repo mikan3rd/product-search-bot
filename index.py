@@ -79,8 +79,8 @@ def handle_image(event):
 
         columns = [
             CarouselColumn(
-                thumbnail_image_url=column['thumbnail_image_url'],
-                title='this is menu1',
+                thumbnail_image_url='https://example.com/item1.jpg',
+                title=column['title'],
                 text='description1',
                 actions=[
                     URITemplateAction(
