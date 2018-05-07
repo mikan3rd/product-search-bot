@@ -121,7 +121,7 @@ def search_product(image=None):
 
     results = []
     for content in candidates:
-        content['datail']['maker'] = \
+        content['detail']['maker'] = \
             content['detail'].get('maker') or  \
             content['detail'].get('publisher', '')
 
