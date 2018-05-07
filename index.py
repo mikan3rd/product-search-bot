@@ -79,13 +79,13 @@ def handle_image(event):
 
         columns = [
             CarouselColumn(
-                thumbnail_image_url=column['thumbnail_image_url'],
-                title=column['title'],
-                text=column['text'],
+                thumbnail_image_url='https://example.com/item1.jpg',
+                title='this is menu1',
+                text='description1',
                 actions=[
                     URITemplateAction(
-                        label=column['actions']['label'],
-                        uri=column['actions']['uri'],
+                        label='uri1',
+                        uri='http://example.com/1'
                     )
                 ]
             )
