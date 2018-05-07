@@ -8,7 +8,7 @@ from linebot.models import (ImageMessage, MessageEvent, TextMessage,
                             TextSendMessage)
 
 import settings
-from face import get_face_info
+from docomo import search_product
 
 app = Flask(__name__)
 
@@ -43,7 +43,7 @@ def handle_message(event):
     text = event.message.text
 
     if (text.startswith('http')):
-        image_text = get_face_info(text)
+        image_text = search_product(text)
         messages = [
             TextSendMessage(text=image_text),
         ]
@@ -67,7 +67,7 @@ def handle_image(event):
     image = BytesIO(message_content.content)
 
     try:
-        image_text = get_face_info(image=image)
+        image_text = search_product(image=image)
 
         messages = [
             TextSendMessage(text=image_text),

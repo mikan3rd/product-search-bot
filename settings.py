@@ -12,6 +12,7 @@ load_dotenv(dotenv_path)
 YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET")
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN")
 
-# computer VISION
-KEY1 = os.environ.get("KEY1")
-KEY2 = os.environ.get("KEY2")
+# docomo
+CLIENT_ID = os.environ.get("CLIENT_ID")
+CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
+API_KEY = os.environ.get("API_KEY")
