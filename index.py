@@ -72,7 +72,6 @@ def handle_image(event):
 
         for column in result:
             print('thumbnail_image_url:', column['thumbnail_image_url'])
-            print('text:', column['text'])
             print('label:', column['actions']['label'])
             print('uri:', column['actions']['uri'])
 
@@ -83,7 +82,7 @@ def handle_image(event):
                 text=column['text'],
                 actions=[
                     URITemplateAction(
-                        label='uri1',
+                        label=column['actions']['label'],
                         uri='http://example.com/1'
                     )
                 ]
