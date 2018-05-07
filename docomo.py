@@ -119,8 +119,13 @@ def search_product(image=None):
     if not candidates:
         return '商品が見つかりませんでした'
 
-    result = [
-        {
+    results = []
+    for content in candidates:
+        content['datail']['maker'] = \
+            content['detail'].get('maker') or  \
+            content['detail'].get('publisher', '')
+
+        result = {
             "thumbnail_image_url": content['imageUrl'],
             "title": content['detail']['itemName'],
             "text": "{maker}： {brand}\n発売日： {releaseDate}"
@@ -130,12 +135,11 @@ def search_product(image=None):
                 "uri": content['sites'][0]['url']
             }
         }
-        for content in candidates
-    ]
+        results.append(result)
 
-    print(result)
+    print(results)
 
-    return result
+    return results
 
 
 if __name__ == "__main__":
