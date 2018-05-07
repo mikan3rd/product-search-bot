@@ -72,7 +72,6 @@ def handle_image(event):
 
         for column in result:
             print('thumbnail_image_url:', column['thumbnail_image_url'])
-            print('title:', column['title'])
             print('text:', column['text'])
             print('label:', column['actions']['label'])
             print('uri:', column['actions']['uri'])
@@ -81,7 +80,7 @@ def handle_image(event):
             CarouselColumn(
                 thumbnail_image_url='https://example.com/item1.jpg',
                 title=column['title'],
-                text='description1',
+                text=column['text'],
                 actions=[
                     URITemplateAction(
                         label='uri1',
