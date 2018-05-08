@@ -64,12 +64,12 @@ def handle_image(event):
         result = search_product(image)
 
         if isinstance(result, str):
-            messages = [TextSendMessage(text=result)]
+            messages = [
+                TextSendMessage(text=result),
+                TextSendMessage(text='ロゴや商品名が写っていると見つかりやすくなるよ！')
+            ]
 
         elif isinstance(result, list):
-
-            for column in result:
-                print('thumbnail_image_url:', column['thumbnail_image_url'])
 
             columns = [
                 CarouselColumn(
