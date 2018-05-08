@@ -66,7 +66,7 @@ def handle_image(event):
         if isinstance(result, str):
             messages = [
                 TextSendMessage(text=result),
-                TextSendMessage(text='ロゴや商品名が写っていると見つかりやすくなるよ！')
+                TextSendMessage(text='食品パッケージ/書籍/CD/DVD/ゲームソフト/PCソフトを検索できるよ！')
             ]
 
         elif isinstance(result, list):
